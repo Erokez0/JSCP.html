@@ -11,6 +11,7 @@
 
     --test-success-color: #8EFF9F;
     --test-error-color: #FF5F5F;
+    --test-okay-color: #FFDA6A;
 }
 aside{
     position: fixed;
@@ -30,7 +31,7 @@ body{
     font-weight: 500;
     font-style: normal;
 
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 #checkPointHeader{
     display: flex;
@@ -277,6 +278,9 @@ details summary::-webkit-details-marker {
 }
 .taskStatusError{
     color: var(--test-error-color);
+}
+.taskStatusOkay{
+    color: var(--test-okay-color);
 }
 .groupDetails > summary::after,
 details > summary::after {

@@ -109,6 +109,7 @@ function openCheckPoint(checkPoint) {
 
     checkPointHeader.appendChild(name)
     let testResults = {}
+    let allWeights = []
     for(let test in checkPointCheckers[checkPoint.checkPointName]){
 
         let weights = checkPointCheckers[checkPoint.checkPointName][test]["weights"]
@@ -124,6 +125,7 @@ function openCheckPoint(checkPoint) {
             params)
         
         testResults[test] = testResult
+        allWeights.push(weights)
     }
     const tasks = Object.keys(checkPoint.tasks)
     let testPoints = [];
@@ -133,7 +135,15 @@ function openCheckPoint(checkPoint) {
     let maxPoints = Object.values(checkPointCheckers[checkPoint.checkPointName]["Тест 1"]["weights"]).reduce((sum, el) => sum + el, 0)
     let gotPoints = Math.min(...testPoints)
 
-    allPoints.innerText = `Результат: ${gotPoints}/${maxPoints}`
+    allPoints.innerText = `Результат: `
+    const colorSpan = document.createElement("span")
+    colorSpan.innerText = `${gotPoints}/${maxPoints}`
+    colorSpan.className = +gotPoints/+maxPoints === 1
+        ? "taskStatusSuccess" 
+        : +gotPoints/+maxPoints >= 0.5 
+            ? "taskStatusOkay" 
+            : "taskStatusError"
+    allPoints.appendChild(colorSpan)
     checkPointHeader.appendChild(allPoints)
 
     
@@ -141,9 +151,27 @@ function openCheckPoint(checkPoint) {
         const taskDiv = document.createElement("div")
         taskDiv.className = "task"
         let taskName = `task0${+task+1}`
+        const taskNameP = document.createElement("p")
+        taskNameP.innerText = `Задание ${+task+1}`
+        const taskPointsP = document.createElement("p")
+
+        let gotPointsTask = +testResults[`Тест ${+task+1}`][`task0${+task+1}`]["points"]
+        let allPointsTask = +allWeights[task][`task0${+task+1}`]
+
+        const colorSpanP =  document.createElement("span")
+        colorSpanP.innerText = `${gotPointsTask}/${allPointsTask}`
+        console.log("Баллы: ", gotPointsTask/allPointsTask)
+        colorSpanP.className = +gotPointsTask/+allPointsTask === 1
+        ? "taskStatusSuccess" 
+        : gotPointsTask/allPointsTask >= 0.5 
+            ? "taskStatusOkay" 
+            : "taskStatusError"
+        taskPointsP.appendChild(colorSpanP)
         const taskHeader = document.createElement("div")
+        taskHeader.appendChild(taskNameP)
+        taskHeader.appendChild(taskPointsP)
         taskHeader.className = "taskHeader"
-        taskHeader.innerText = `Задание ${+task+1}`
+        
 
         taskDiv.appendChild(taskHeader)
         docMain.appendChild(taskDiv)

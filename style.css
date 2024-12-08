@@ -270,12 +270,12 @@ details summary::-webkit-details-marker {
 }
 .groupDetails > summary::after,
 details > summary::after {
-  content: url(/src/assets/arrow.svg);
+  content: url(./src/assets/arrow.svg);
   width: 44px;
   height: 41px;
 }
 .group::before{
-    content: url(/src/assets/line.svg);
+    content: url(./src/assets/line.svg);
     width: 27px;
     height: 53px;
     align-self: center;
@@ -283,7 +283,7 @@ details > summary::after {
 }
 .groupDetails[open] > summary::after,
 details[open] > summary::after {
-    content: url(/src/assets/arrow.svg);
+    content: url(./src/assets/arrow.svg);
     transform: scale(1, -1);
     width: 44px;
     height: 41px;

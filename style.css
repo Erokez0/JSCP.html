@@ -29,6 +29,8 @@ body{
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
+
+    overflow-y: scroll
 }
 #checkPointHeader{
     display: flex;
@@ -297,8 +299,7 @@ details[open] > summary::after {
     height: 41px;
     flex-shrink: 0;
 }
-
-.checkPoint,
+.сheckPoint,
 .group,
 .student{
     box-shadow: inset 0px 8px 17.4px var(--shadow-color);

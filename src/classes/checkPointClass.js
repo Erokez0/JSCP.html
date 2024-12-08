@@ -61,7 +61,7 @@ export default class CheckPoint {
             status: asssertionResult,
             message: asssertionResult
                 ? "Success!" 
-                : `${taskResult} != ${correctResult}`
+                : `${taskResult} != ${JSON.stringify(correctResult)}`
         }
     }
 

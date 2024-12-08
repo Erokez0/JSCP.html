@@ -1,4 +1,5 @@
 import * as filenames from './filenames.json' with { type: "json" };
+import { checkPointCheckers } from './src/checkers/checkers.js';
 async function importCheckPointsAsObject(){
     let checkPoints = []
     let fileNameArray = Object.create(null)
@@ -9,7 +10,16 @@ async function importCheckPointsAsObject(){
     }
     return checkPoints
 }
-const checkPoints = await importCheckPointsAsObject()
+const checkPoints = (await importCheckPointsAsObject()).sort((a, b) => {
+    let result = String(a).localeCompare(String(b))
+    for(let vala of Object.values(a)){
+        for(let valb of Object.values(b)){
+            result += String(vala).localeCompare(String(valb))
+        }
+    }
+    return result
+})
+
 import Checker from './src/classes/CheckerClass.js'
 import CheckPoint from './src/classes/checkPointClass.js';
 const checker = new Checker();
@@ -78,20 +88,6 @@ function checkPointsObjectToHtml(checkPoinstObject){
     }
 }
 checkPointsObjectToHtml(docCheckPoints)
-const checkPointCheckers = {
-    "КТ №1 - циклы" : {
-        "Тест 1": {
-            weights: {"task01": 5, "task02": 5}, 
-            prohibitions: {}, 
-            correctResults: {"task01": 5, "task02": 5}, 
-            params: {"task01": [2,3], "task02" : [10,5]}},
-        "Тест 2": {
-            weights: {"task01": 5, "task02": 5}, 
-            prohibitions: {}, 
-            correctResults: {"task01": 10, "task02": 10}, 
-            params: {"task01": [7,3], "task02" : [10,0]}}
-    }
-}
 function openCheckPoint(checkPoint) {
     if(!Object.keys(checkPointCheckers).includes(checkPoint.checkPointName)){
         const checkPointHeader = document.getElementById("checkPointHeader");
@@ -154,13 +150,14 @@ function openCheckPoint(checkPoint) {
         const taskNameP = document.createElement("p")
         taskNameP.innerText = `Задание ${+task+1}`
         const taskPointsP = document.createElement("p")
-
-        let gotPointsTask = +testResults[`Тест ${+task+1}`][`task0${+task+1}`]["points"]
-        let allPointsTask = +allWeights[task][`task0${+task+1}`]
+        let gotPointsTask = 100
+        let allPointsTask = allWeights[0][`task0${+task+1}`]
+        for(let test in checkPointCheckers[checkPoint.checkPointName]){
+            gotPointsTask = Math.min((testResults[test][`task0${+task+1}`]["points"]), gotPointsTask) 
+        }
 
         const colorSpanP =  document.createElement("span")
         colorSpanP.innerText = `${gotPointsTask}/${allPointsTask}`
-        console.log("Баллы: ", gotPointsTask/allPointsTask)
         colorSpanP.className = +gotPointsTask/+allPointsTask === 1
         ? "taskStatusSuccess" 
         : gotPointsTask/allPointsTask >= 0.5 

@@ -49,16 +49,23 @@ export default class Checker {
             }
             //Check for prohibited usage
             if(prohibitions[task]){
-                let reasons = new Array()
+                let reasons = []
                 for(let prohibition of prohibitions[task]){
                     if(taskFunctionString.includes(prohibition)){
+                        if(prohibition.endsWith("(")) {
+                            reasons.push(`Использовано "${prohibition})"`)
+                        }
+                        else {
+                            reasons.push(`Использовано "${prohibition}"`)   
+                        }
                         checked[task] = {
                             points: 0,
+                            reasons: reasons
+                           
                         }
-                        reasons.push(`Использовано "${prohibition}" `)
                     }
                 }
-                checked[task].reasons = reasons?? checked[task].reasons 
+                if(reasons && JSON.stringify(reasons) !== JSON.stringify(checked[task].reasons)) checked[task].reasons.push(...reasons)
             }
         }
         

@@ -10,7 +10,7 @@ function minus(a,b){
 
 export const parshinKirill = new CheckPoint(
     "Паршин Кирилл", 
-    "КТ №1 - циклы",
+    "КТ №1. тест",
     "ИТ 11.24.1",
     [
         plus,

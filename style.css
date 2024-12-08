@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+:root{
+    --background-color-color-dark: #2C254A;
+    --background-color: #453B70;
+    --shadow-color: rgba(44, 37, 74, 0.253);
+    
+    --list-cp-color: #52497A;
+    --list-group-color: #685D94;
+    --list-student-color: #574C83;
+
+    --test-success-color: #8EFF9F;
+    --test-error-color: #FF5F5F;
+}
+aside{
+    width: 377px;
+    background-color: var(--background-color);
+}
+body{
+    background-color: var(--background-color);
+    display: flex;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    color: white;
+
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+#checkPointHeader{
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+}
+#checkPointHeader * {
+    font-size: 24px;
+    font-weight: 600;
+}
+header{
+    background-color: var(--background-color);
+    display: flex;
+    width: 377px;
+    height: 120px;
+    font-family: 'Source Code Pro', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid rgba(var(--background-color-color-dark));
+}
+pre{
+    font-family: 'Source Code Pro', sans-serif;
+}
+main{
+    padding: 50px 50px 0px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 24px;
+    flex-shrink: 0;
+    width: calc(100% - 377px - 100px);
+    background-color: var(--background-color-color-dark);
+}
+nav{
+    display: flex;
+    width: 377px;
+    flex-shrink: 0;
+    background-color: var(--background-color);
+    height: calc(100vh - 120px);
+    flex-grow: 1;
+}
+ul,
+li {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    line-height: 53px;
+}
+nav > ul {
+    width: 100%;
+    padding-left: 0;
+    font-size: 24px;
+    flex-shrink: 0;
+    flex-shrink: 0;
+
+}
+.groupDetails ul {
+    padding: 0;
+}
+.checkPoint{
+    background-color: var(--list-cp-color);
+    display: flex;
+    padding-left: 50px;
+}
+*[class="checkPoint"]{
+    box-shadow: inset 0px 8px 17.4px var(--shadow-color);
+}
+.group {
+    background-color: var(--list-group-color);  
+    padding: 0;
+    padding-left: 50px;
+    line-height: 53px;
+
+    font-size: 24px;
+    font-weight: 500;
+    padding-right: 16.16px;
+}
+
+.student {
+    background-color: var(--list-student-color);
+    width: 100%;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+    text-align: left;
+    transition: all 0.5s;
+    line-height: 53px;
+    align-self: center;
+    align-items: first baseline;
+    text-indent: 50px;
+    cursor: pointer;
+}
+.student:hover{
+    background-color: #3D3465;
+}
+.group > summary{
+    display: flex;
+}
+summary{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16.16px;
+    vertical-align: middle;
+
+    background-color: #52497A;
+
+    font-weight: 600;
+    font-size: 24px;
+
+    cursor: pointer;
+    overflow: hidden;
+}
+* summary *{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16.16px;
+}
+summary::after{
+    transition: all 0.25s;
+    align-self: center;
+}
+ul >details > summary     {
+    padding-left: 50px;
+}
+details summary::-webkit-details-marker {
+  display: none
+}
+
+.task {
+    margin-top: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.taskHeader {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.taskHeader * {
+    margin: 0;
+    font-weight: 500;
+}
+.taskCode > *,
+.taskTestError > *,
+.taskTestSuccess > * {
+    font-weight: 500;
+}
+.taskCode {
+    width: 100%;
+    background-color: transparent;
+    line-height: 50px;
+    padding-top: 10px;
+}
+.taskCode > * {
+    background-color: transparent;
+    border: 5px solid var(--background-color);  
+}
+.taskCode > summary {
+    padding-left: 20px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.taskCode > pre {
+    border-top: none;
+    margin: 0;
+
+    background-color: var(--background-color-color-dark);
+    filter: brightness(80%);
+}
+
+.taskTestSuccess {
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 5px solid var(--background-color);  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 50px;
+    height: 50px;
+}
+.taskTestError {
+    background-color: transparent;
+}
+.taskTestError p {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.taskTestError > summary > div {
+    padding-left: 20px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.taskTestError *:not(p) {
+    width: 100%;
+}
+.taskTestError * {
+    height: 50px;
+    line-height: 50px;
+    padding-right: 10px;
+    background-color: transparent;
+    margin: 0;
+    padding-right: 0;
+    vertical-align: middle;
+}
+.taskTestError > pre {
+    margin: 0 0 0 -5px;
+    border: 5px solid var(--background-color);  
+    border-top: none;
+    margin: 0;
+    width: calc(100% - 30px);
+    padding: 10px;
+
+    background-color: var(--background-color-color-dark);
+    filter: brightness(80%);
+}
+.taskTestError> summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 5px solid var(--background-color);  
+    width: calc(100% - 10px);
+}
+.taskStatusSuccess{
+    color: var(--test-success-color);
+}
+.taskStatusError{
+    color: var(--test-error-color);
+}
+.groupDetails > summary::after,
+details > summary::after {
+  content: url(/src/assets/arrow.svg);
+  width: 44px;
+  height: 41px;
+}
+.group::before{
+    content: url(/src/assets/line.svg);
+    width: 27px;
+    height: 53px;
+    align-self: center;
+    margin-right: -100px;
+}
+.groupDetails[open] > summary::after,
+details[open] > summary::after {
+    content: url(/src/assets/arrow.svg);
+    transform: scale(1, -1);
+    width: 44px;
+    height: 41px;
+    flex-shrink: 0;
+}
+
+.checkPoint,
+.group,
+.student{
+    box-shadow: inset 0px 8px 17.4px var(--shadow-color);
+}
+header img{
+    align-self: center;
+    padding-right: 29px;
+}

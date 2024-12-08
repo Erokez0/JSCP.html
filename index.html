@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside>
+      <header>
+        <img src="/src/assets/JSCP.html.svg" alt="" />
+      </header>
+      <nav>
+        <ul id="navCheckPoints"></ul>
+      </nav>
+    </aside>
+    <main id="main">
+      <div id="checkPointHeader">
+        <p id="name">Кадырыждаев Абдурахман</p>
+        <p id="allPoints">Результат: <span style="color: greenyellow;">0/10</span></p>
+      </div>
+
+      <div class="task">
+        <div class="taskHeader">
+          <p id="">Задание 1</p>
+          <p>Баллы: <span style="color: greenyellow;">2/2</span></p>
+        </div>
+        <details class="taskCode">
+          <summary>Код</summary>
+          <pre>function plus(a,b){
+    return a+b
+    }</pre>
+        </details>
+        <div class="taskTestSuccess">
+            <p>Тест 1</p>
+            <p class="taskStatusSuccess" style="color: greenyellow;">Правильно</p>
+        </div>
+
+        <details class="taskTestError">
+          <summary>
+            <div>
+              <p>Тест 2</p>
+              <p class="taskStatusError" style="color: red">Ошибка</p>
+            </div>
+          </summary>
+          <pre >Использовано "reverse"</pre>
+        </details>
+        
+      </div>
+    </main>
+    <script type="module" src="/index.js"></script>
+  </body>
+</html>

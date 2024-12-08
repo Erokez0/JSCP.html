@@ -225,6 +225,9 @@ details summary::-webkit-details-marker {
 .taskTestError {
     background-color: transparent;
 }
+.taskTestError *::after {
+    margin-right: 10px;
+}
 .taskTestError p {
     padding-top: 0;
     padding-bottom: 0;

@@ -12,7 +12,6 @@ export default class Checker {
         let checked = {}
         let points = 0;
         for(let task in checkPoint.tasks){
-            let taskIndex = 0;
             const taskFunction = checkPoint.tasks[task]
             const taskFunctionString = taskFunction.toString()
             checked[task] = {

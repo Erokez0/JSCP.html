@@ -55,13 +55,25 @@ export default class CheckPoint {
      * @example { status: false, message: "12 != 5" }
      */
     assertTask(taskName, correctResult, ...params){
-        const taskResult = this.tasks[taskName](...params)
-        const asssertionResult = JSON.stringify(taskResult) === JSON.stringify(correctResult);
+        let paramsCopy = []
+        params.forEach(param => {
+            if(typeof param != "function" && !!param){
+                paramsCopy.push(JSON.parse(JSON.stringify(param)))
+            } else if (param === undefined){
+                paramsCopy.push(undefined)
+            } else {
+                paramsCopy.push(param)
+            }
+        })
+
+        console.log(taskName, paramsCopy)
+        let taskResult = this.tasks[taskName](...paramsCopy)
+        let assertionResult = JSON.stringify(taskResult) === JSON.stringify(correctResult);
         return {
-            status: asssertionResult,
-            message: asssertionResult
+            status: assertionResult,
+            message: assertionResult
                 ? "Success!" 
-                : `${taskResult} != ${JSON.stringify(correctResult)}`
+                : `${JSON.stringify(taskResult)} != ${JSON.stringify(correctResult)}`
         }
     }
 

@@ -102,17 +102,17 @@ function openCheckPoint(checkPoint) {
     const allPoints = document.createElement("p");
     const name = document.createElement("p");
     name.innerText = checkPoint.studentName
-
+    
     checkPointHeader.appendChild(name)
     let testResults = {}
     let allWeights = []
     for(let test in checkPointCheckers[checkPoint.checkPointName]){
-
+    
         let weights = checkPointCheckers[checkPoint.checkPointName][test]["weights"]
         let prohibitions = checkPointCheckers[checkPoint.checkPointName][test]["prohibitions"]
         let correctResults = checkPointCheckers[checkPoint.checkPointName][test]["correctResults"]
         let params = checkPointCheckers[checkPoint.checkPointName][test]["params"]
-
+        
         let testResult = checker.check(
             checkPoint, 
             weights,
@@ -130,7 +130,7 @@ function openCheckPoint(checkPoint) {
     }
     let maxPoints = Object.values(checkPointCheckers[checkPoint.checkPointName]["Тест 1"]["weights"]).reduce((sum, el) => sum + el, 0)
     let gotPoints = Math.min(...testPoints)
-
+    
     allPoints.innerText = `Результат: `
     const colorSpan = document.createElement("span")
     colorSpan.innerText = `${gotPoints}/${maxPoints}`
@@ -141,7 +141,7 @@ function openCheckPoint(checkPoint) {
             : "taskStatusError"
     allPoints.appendChild(colorSpan)
     checkPointHeader.appendChild(allPoints)
-
+    
     
     for(let task in tasks){
         const taskDiv = document.createElement("div")
@@ -152,10 +152,11 @@ function openCheckPoint(checkPoint) {
         const taskPointsP = document.createElement("p")
         let gotPointsTask = 100
         let allPointsTask = allWeights[0][`task0${+task+1}`]
-        for(let test in checkPointCheckers[checkPoint.checkPointName]){
-            gotPointsTask = Math.min((testResults[test][`task0${+task+1}`]["points"]), gotPointsTask) 
-        }
 
+        for(let test in checkPointCheckers[checkPoint.checkPointName]){
+            gotPointsTask = Math.min((testResults[test][taskName]["points"]), gotPointsTask) 
+        }
+    
         const colorSpanP =  document.createElement("span")
         colorSpanP.innerText = `${gotPointsTask}/${allPointsTask}`
         colorSpanP.className = +gotPointsTask/+allPointsTask === 1
@@ -163,13 +164,14 @@ function openCheckPoint(checkPoint) {
         : gotPointsTask/allPointsTask >= 0.5 
             ? "taskStatusOkay" 
             : "taskStatusError"
+
         taskPointsP.appendChild(colorSpanP)
         const taskHeader = document.createElement("div")
         taskHeader.appendChild(taskNameP)
         taskHeader.appendChild(taskPointsP)
         taskHeader.className = "taskHeader"
         
-
+    
         taskDiv.appendChild(taskHeader)
         docMain.appendChild(taskDiv)
         
@@ -181,15 +183,15 @@ function openCheckPoint(checkPoint) {
         const taskCodePre = document.createElement("pre")
         taskCodePre.innerText = checkPoint["tasks"][taskName].toString()
         taskCode.appendChild(taskCodePre)
-
+    
         taskDiv.appendChild(taskCode)
-
+    
         for(let test in testResults){
             let taskTestResult = testResults[test][taskName]
             if(JSON.stringify(taskTestResult.reasons) === JSON.stringify(["Результаты совпали"])){
                 const taskTest = document.createElement("div")
                 taskTest.className = "taskTestSuccess"
-
+    
                 const taskTestName = document.createElement("p")
                 taskTestName.innerText = `${test}`
                 const taskTestStatus = document.createElement("p")
@@ -197,44 +199,49 @@ function openCheckPoint(checkPoint) {
                 taskTestStatus.className = "taskStatusSuccess"
                 taskTest.appendChild(taskTestName)
                 taskTest.appendChild(taskTestStatus)
-
-
+    
+    
                 taskDiv.appendChild(taskTest)
             } else {
                 const taskTest = document.createElement("details")
                 taskTest.className = "taskTestError" 
-
+    
                 const summary = document.createElement("summary")
                 const div = document.createElement("div")
                 taskTest.appendChild(summary)
                 summary.appendChild(div)
-
+    
                 const taskTestName = document.createElement("p")
                 taskTestName.innerText = `${test}`
                 const taskTestStatus = document.createElement("p")
                 taskTestStatus.innerText = "Ошибка"
                 taskTestStatus.className = "taskStatusError"
-
+    
                 const pre = document.createElement("pre")
                 pre.innerText = taskTestResult.reasons.join(", ")
-
+    
                 taskTest.appendChild(pre)
                 div.appendChild(taskTestName)
                 div.appendChild(taskTestStatus)
-
+    
                 taskDiv.appendChild(taskTest)
             }
         }
     }
 }
 
+let openStudent
 const students = document.getElementsByClassName("student")
 for(let student of students){
     student.onclick = () => {
+        if(openStudent === student){
+            return  
+        }
         let checkPointName = student.parentElement.parentElement.parentElement.innerText.split("\n")[0]
         docMain.replaceChildren(checkPointHeader);
         checkPointHeader.innerHTML = '';
         let chosenStudent = studentToCheckPoint[`${student.innerText} ${checkPointName}`]
         openCheckPoint(chosenStudent)
+        openStudent = student
     }
 }

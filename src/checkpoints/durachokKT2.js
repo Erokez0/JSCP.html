@@ -72,7 +72,7 @@ function checkElem2(array, callback) {
     return false; 
 }
 export const vanyaSolotov = new CheckPoint(
-    "Халавщик JavaScript", 
+    "Халявщик JavaScript", 
     'КТ №2. "Функции"',
     "ИТ 11.24.2",
     [

@@ -1,4 +1,4 @@
-export const checkPointCheckers = {
+const checkPointCheckers = {
     "КТ №1. тест" : {
         "Тест 1": {
             weights: {"task01": 5, "task02": 5}, 
@@ -11,9 +11,7 @@ export const checkPointCheckers = {
             correctResults: {"task01": 10, "task02": 10}, 
             params: {"task01": [7,3], "task02" : [10,0]}}
     },
-
-
-
+    
     'КТ №2. "Функции"': {
         "Тест 1": {
             weights: {
@@ -56,6 +54,8 @@ export const checkPointCheckers = {
                 "task03": [[3]], 
                 "task04": [[]], 
                 "task05": [[], () => true]}
+            }
         }
-        }
-    }
+}
+
+export {checkPointCheckers}

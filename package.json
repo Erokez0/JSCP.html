@@ -1,15 +1,15 @@
 {
     "type": "module",
-    "name": "jscp",
+    "name": "jscp.html",
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "reload": "node filenames.js",
-        "autoreload": "nodemon filenames.js"
+        "reload": "node ./src/filenames/filenames.js",
+        "autoreload": "nodemon./src/filenames/filenames.js"
     },
-    "author": "",
+    "author": "Erokez",
     "license": "ISC",
-    "description": "",
+    "description": "Веб интерфейс для проверки контрольных точек по дисциплине JavaScript",
     "dependencies": {
         "nodemon": "^3.1.7"
     }

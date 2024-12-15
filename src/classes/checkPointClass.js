@@ -19,7 +19,7 @@ export default class CheckPoint {
      */
     assertTask(taskName, correctResult, ...params){
         let paramsCopy = copy(params);
-
+        
         function copy(object) {
             let objectCopy = Array.isArray(object) ? [] : {};
             let value;

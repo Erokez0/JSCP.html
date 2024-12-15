@@ -28,7 +28,7 @@ import Checker from './src/classes/CheckerClass.js'
 import CheckPoint from './src/classes/checkPointClass.js';
 const checker = new Checker();
 
-const docMain = document.getElementById('main');
+
 const docNavCheckPoints = document.getElementById("navCheckPoints");
 const checkPointHeader = document.getElementById("checkPointHeader");
 let [docCheckPoints, studentToCheckPoint] = checkPointsToObject(checkPoints)
@@ -41,7 +41,7 @@ function checkPointsToObject(checkPoints){
         let group = checkPoint.group;
         let student = checkPoint.studentName;
 
-        studentToCheckPoint[`${student} ${checkPointName}`] = checkPoint
+        studentToCheckPoint[`${student} ${checkPointName}`] = checkPoint;
         if(!docCheckPoints[checkPointName]) {
             docCheckPoints[checkPointName] = {[group]: {[student]: checkPoint}};
         }
@@ -49,10 +49,10 @@ function checkPointsToObject(checkPoints){
             docCheckPoints[checkPointName][group] = {[student]: checkPoint};    
         }
         if(!docCheckPoints[checkPointName][group][student]){
-            docCheckPoints[checkPointName][group][student]  = checkPoint ;
+            docCheckPoints[checkPointName][group][student]  = checkPoint;
         }
     }   
-    return [docCheckPoints, studentToCheckPoint]
+    return [docCheckPoints, studentToCheckPoint];
 }
 
 /**
@@ -68,8 +68,6 @@ function checkPointsObjectToHtml(checkPoinstObject){
         details.className = "сheckPointDetails"
         cpSummary.innerText = checkPoint
         details.appendChild(cpSummary)
-        
-        
 
         for(let group in checkPoinstObject[checkPoint]){
             const groupDetails = document.createElement("details")
@@ -171,22 +169,22 @@ function openCheckPoint(checkPoint) {
 
         taskPointsP.appendChild(colorSpanP)
         const taskHeader = document.createElement("div")
-        taskHeader.appendChild(taskNameP)
-        taskHeader.appendChild(taskPointsP)
-        taskHeader.className = "taskHeader"
+        const docMain = document.getElementById('main');
+        taskHeader.appendChild(taskNameP);
+        taskHeader.appendChild(taskPointsP);
+        taskHeader.className = "taskHeader";
         
-    
-        taskDiv.appendChild(taskHeader)
-        docMain.appendChild(taskDiv)
+        
+        taskDiv.appendChild(taskHeader);
+        docMain.appendChild(taskDiv);
         
         const taskCode = document.createElement("details")
         taskCode.className = "taskCode"
         const taskCodeSummary = document.createElement("summary")
         taskCodeSummary.innerText = "Код"
-        taskCode.appendChild(taskCodeSummary)
         const taskCodePre = document.createElement("pre")
         taskCodePre.innerText = checkPoint["tasks"][taskName].toString()
-        taskCode.appendChild(taskCodePre)
+        taskCode.append(taskCodeSummary, taskCodePre)
     
         taskDiv.appendChild(taskCode)
     
@@ -201,9 +199,7 @@ function openCheckPoint(checkPoint) {
                 const taskTestStatus = document.createElement("p")
                 taskTestStatus.innerText = "Правильно"
                 taskTestStatus.className = "taskStatusSuccess"
-                taskTest.appendChild(taskTestName)
-                taskTest.appendChild(taskTestStatus)
-    
+                taskTest.append(taskTestName, taskTestStatus)
     
                 taskDiv.appendChild(taskTest)
             } else {
@@ -225,9 +221,8 @@ function openCheckPoint(checkPoint) {
                 pre.innerText = taskTestResult.reasons.join(", ")
     
                 taskTest.appendChild(pre)
-                div.appendChild(taskTestName)
-                div.appendChild(taskTestStatus)
-    
+                div.append(taskTestName, taskTestStatus)
+
                 taskDiv.appendChild(taskTest)
             }
         }
@@ -238,10 +233,16 @@ let openStudent
 const students = document.getElementsByClassName("student")
 for(let student of students){
     student.onclick = () => {
-        if(openStudent === student){
-            return  
-        }
-        let checkPointName = student.parentElement.parentElement.parentElement.innerText.split("\n")[0]
+        if(openStudent === student) return;  
+
+        let checkPointName = student
+            .parentElement
+            .parentElement
+            .parentElement
+            .innerText
+            .split("\n")[0];
+
+        const docMain = document.getElementById('main');
         docMain.replaceChildren(checkPointHeader);
         checkPointHeader.innerHTML = '';
         let chosenStudent = studentToCheckPoint[`${student.innerText} ${checkPointName}`]

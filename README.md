@@ -3,7 +3,7 @@
 
 ## Добавление работы студента на проверку
 Вид работы студента
-```
+```javascript
 import CheckPoint from "../classes/checkPointClass.js"
 ..
 export const usmodjon = new CheckPoint(
@@ -11,7 +11,7 @@ export const usmodjon = new CheckPoint(
     "Название контрольной точки",
     "Номер группы",
     [
-    Используемые функции в порядке контрольной точки
+    //Используемые функции в порядке контрольной точки
 ]
 )
 ```
@@ -26,11 +26,11 @@ Nodemon
 1. Обновить файлы контрольных точек
 
 Ручное обновление файлов
-```
+```bash
 npm run reload
 ```
 Автоматическое обновление файлов
-```
+```bash
 npm run autoreload
 ```
 2. Развернуть index.html
@@ -40,7 +40,7 @@ npm run autoreload
 ## Добавление новых проверок
 В файле src/checkers/checkers.js в объекте checkPointCheckers добавить ключ с названием КТ
 По ключу добавлять объекты с названиями тестов
-```
+```javascript
 "Тест №": {
             weights: {
                 "task01": 2, 
@@ -65,9 +65,6 @@ npm run autoreload
 }
 ```
 weights - возможное количество баллов за каждую задачу
-
 prohibitions - запретные слова для каждой задачи
-
 correctResults - правильные результаты при заданных параметрах для каждой задачи
-
 params - массив параметров для каждой задачи

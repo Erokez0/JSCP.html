@@ -328,3 +328,10 @@ header img{
     align-self: center;
     padding-right: 29px;
 }
+
+.placeholder{
+    color: rgba(150, 150, 150, 20%); 
+    font-family: 'Source Code Pro'; 
+    letter-spacing: 5px; 
+    align-self: center;
+}

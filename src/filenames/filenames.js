@@ -26,5 +26,5 @@ async function saveFilenamesToFile(directoryPath, outputFilePath) {
 }
   
 
-saveFilenamesToFile("../checkpoints", "./filenames.json");
+saveFilenamesToFile("./src/checkpoints", "./src/filenames/filenames.json");
 

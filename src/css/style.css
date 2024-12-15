@@ -12,12 +12,14 @@
     --test-success-color: #8EFF9F;
     --test-error-color: #FF5F5F;
     --test-okay-color: #FFDA6A;
+
+    --student-hover: #3D3465;
 }
 aside{
     position: fixed;
     width: 377px;
     background-color: var(--background-color);
-    overflow-y: scroll;
+    height: 100%;
     
 }
 ::-webkit-scrollbar {
@@ -37,7 +39,6 @@ body{
     font-weight: 500;
     font-style: normal;
 
-    overflow-y: scroll;
 }
 #checkPointHeader{
     display: flex;
@@ -78,6 +79,8 @@ main{
     flex-shrink: 0;
     width: calc(100% - 377px - 100px);
     background-color: var(--background-color-color-dark);
+    min-width: 470px;
+    overflow-y: scroll;
 }
 nav{
     display: flex;
@@ -86,6 +89,7 @@ nav{
     background-color: var(--background-color);
     height: calc(100vh - 120px);
     flex-grow: 1;
+    overflow-y: scroll;
 }
 ul,
 li {
@@ -140,7 +144,7 @@ nav > ul {
     cursor: pointer;
 }
 .student:hover{
-    background-color: #3D3465;
+    background-color: var(--student-hover);
 }
 .group > summary{
     display: flex;
@@ -181,6 +185,7 @@ details summary::-webkit-details-marker {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-width: 450px;
 }
 .taskHeader {
     display: flex;
@@ -201,6 +206,7 @@ details summary::-webkit-details-marker {
     background-color: transparent;
     line-height: 50px;
     padding-top: 10px;
+    min-width: 300px;
 }
 .taskCode > * {
     background-color: transparent;
@@ -231,8 +237,10 @@ details summary::-webkit-details-marker {
     align-items: center;
     line-height: 50px;
     height: 50px;
+    min-width: 250px;
 }
 .taskTestError {
+    min-width: 300px;
     background-color: transparent;
 }
 .taskTestError *::after {
@@ -269,6 +277,8 @@ details summary::-webkit-details-marker {
     width: calc(100% - 30px);
     padding: 10px;
 
+    height: 100%;
+    text-wrap: wrap;
     background-color: var(--background-color-color-dark);
     filter: brightness(80%);
 }
@@ -290,12 +300,12 @@ details summary::-webkit-details-marker {
 }
 .groupDetails > summary::after,
 details > summary::after {
-  content: url(./src/assets/arrow.svg);
+  content: url(../assets/arrow.svg);
   width: 44px;
   height: 41px;
 }
 .group::before{
-    content: url(./src/assets/line.svg);
+    content: url(../assets/line.svg);
     width: 27px;
     height: 53px;
     align-self: center;
@@ -303,7 +313,7 @@ details > summary::after {
 }
 .groupDetails[open] > summary::after,
 details[open] > summary::after {
-    content: url(./src/assets/arrow.svg);
+    content: url(../assets/arrow.svg);
     transform: scale(1, -1);
     width: 44px;
     height: 41px;

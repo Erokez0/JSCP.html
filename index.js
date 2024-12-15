@@ -1,15 +1,19 @@
-import * as filenames from './filenames.json' with { type: "json" };
+import * as filenames from './src/filenames/filenames.json' with { type: "json" };
 import { checkPointCheckers } from './src/checkers/checkers.js';
+
 async function importCheckPointsAsObject(){
     let checkPoints = []
     let fileNameArray = Object.create(null)
     fileNameArray = filenames['default']
     for(let fileName of fileNameArray){
+        console.log()
         let checkPoint = Object.values(await import(`./src/checkpoints/${fileName}`))[0]
         checkPoints.push(checkPoint)
     }
+    
     return checkPoints
 }
+
 const checkPoints = (await importCheckPointsAsObject()).sort((a, b) => {
     let result = String(a).localeCompare(String(b))
     for(let vala of Object.values(a)){

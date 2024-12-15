@@ -9,11 +9,10 @@ export default class Checker {
      * @param {{taskName: [param, param]}} params - объект с указанными аргументами
      */
     check(checkPoint, weights, prohibitions={}, correctResults, params){
-        let checked = {}
+        let checked = {};
         let points = 0;
-        for(let task in checkPoint.tasks){
+        loop: for(let task in checkPoint.tasks){
             const taskFunction = checkPoint.tasks[task]
-            const taskFunctionString = taskFunction.toString()
             checked[task] = {
                 points: 0,
                 task: {
@@ -22,18 +21,22 @@ export default class Checker {
                 }
             }
             //Assert
-            let assertTask = {
-                status: false,
-                message: `Ошибка`
-            }
+            // let assertTask = {
+            //     status: false,
+            //     message: undefined
+            // }
+            console.log(task,)
+            let assertTask = null
             try {
                 assertTask = checkPoint.assertTask(task, correctResults[task], ...params[task])
             } catch(e){
                 checked[task] = {
                     points: 0,
-                    reasons: [assertTask.message]
+                    reasons: [e]
                 }      
             }
+            if(assertTask === null) continue loop;
+
             if(assertTask.status){
                 checked[task] = {
                     points: weights[task],
@@ -48,7 +51,8 @@ export default class Checker {
             }
             //Check for prohibited usage
             if(prohibitions[task]){
-                let reasons = []
+                let reasons = [];
+                const taskFunctionString = taskFunction.toString();
                 for(let prohibition of prohibitions[task]){
                     if(taskFunctionString.includes(prohibition)){
                         if(prohibition.endsWith("(")) {
@@ -64,7 +68,9 @@ export default class Checker {
                         }
                     }
                 }
-                if(reasons && JSON.stringify(reasons) !== JSON.stringify(checked[task].reasons)) checked[task].reasons.push(...reasons)
+                if(reasons && JSON.stringify(reasons) !== JSON.stringify(checked[task].reasons)) {
+                    checked[task].reasons.push(...reasons);
+                }
             }
         }
         
@@ -78,7 +84,7 @@ export default class Checker {
         const checkResult = this.check(checkPoint, weights, prohibitions={}, correctResults, params)
         return `\t\t${checkPoint.getFullName()}\n${JSON.stringify(checkResult)}`
             .replace(/(\{|\}|"|")/g, "")
-            .replace(/,/g,"\n")
-            .replace(/:/g, ": ")
+            .replace(/,/g, "\n")
+            .replace(/:/g, ": ");
     }
 }

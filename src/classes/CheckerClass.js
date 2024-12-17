@@ -30,7 +30,6 @@ export default class Checker {
                 }      
             }
             if(assertTask === null) continue loop;
-
             if(assertTask.status){
                 checked[task] = {
                     points: weights[task],
@@ -55,6 +54,7 @@ export default class Checker {
                         else {
                             reasons.push(`Использовано "${prohibition}"`)   
                         }
+                        points -= weights[task];
                         checked[task] = {
                             points: 0,
                             reasons: reasons
@@ -67,18 +67,10 @@ export default class Checker {
                 }
             }
         }
-        
         return {
             points: points,
             ...checked
         }
 
-    }
-    logCheck(checkPoint, weights, prohibitions={}, correctResults, params){
-        const checkResult = this.check(checkPoint, weights, prohibitions={}, correctResults, params)
-        return `\t\t${checkPoint.getFullName()}\n${JSON.stringify(checkResult)}`
-            .replace(/(\{|\}|"|")/g, "")
-            .replace(/,/g, "\n")
-            .replace(/:/g, ": ");
     }
 }

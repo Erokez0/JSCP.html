@@ -19,7 +19,8 @@ export default class CheckPoint {
      */
     assertTask(taskName, correctResult, ...params){
         let paramsCopy = copy(params);
-        
+        const oldLog = console.log;
+        console.log = () => null;
         function copy(object) {
             let objectCopy = Array.isArray(object) ? [] : {};
             let value;
@@ -37,6 +38,7 @@ export default class CheckPoint {
             taskResult = `${e}`;
         }
         let assertionResult = JSON.stringify(taskResult) === JSON.stringify(correctResult);
+        console.log = oldLog;
         return {
             status: assertionResult,
             message: assertionResult

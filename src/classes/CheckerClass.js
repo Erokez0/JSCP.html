@@ -20,12 +20,6 @@ export default class Checker {
                     reasons: new Array
                 }
             }
-            //Assert
-            // let assertTask = {
-            //     status: false,
-            //     message: undefined
-            // }
-            console.log(task,)
             let assertTask = null
             try {
                 assertTask = checkPoint.assertTask(task, correctResults[task], ...params[task])
